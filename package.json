@@ -1,0 +1,10 @@
+{
+  "name": "nilmo-tesera-pages",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:pages": "node tools/build-pages.mjs",
+    "check:pages": "node tools/check-pages.mjs"
+  }
+}

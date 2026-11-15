@@ -1,0 +1,559 @@
+{
+  "generatedAt": "2026-11-12T02:25:00.438Z",
+  "results": [
+    {
+      "url": "https://teseralab.com/",
+      "status": 200,
+      "saved": true,
+      "file": "index.html",
+      "bytes": 252044,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/robots.txt",
+      "status": 200,
+      "saved": true,
+      "file": "robots.txt",
+      "bytes": 46,
+      "type": "text/plain"
+    },
+    {
+      "url": "https://teseralab.com/sitemap.xml",
+      "status": 200,
+      "saved": true,
+      "file": "sitemap.xml",
+      "bytes": 1158,
+      "type": "application/xml"
+    },
+    {
+      "url": "https://teseralab.com/research",
+      "status": 200,
+      "saved": true,
+      "file": "research\\index.html",
+      "bytes": 87141,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/worlds",
+      "status": 200,
+      "saved": true,
+      "file": "worlds\\index.html",
+      "bytes": 95181,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/agents",
+      "status": 200,
+      "saved": true,
+      "file": "agents\\index.html",
+      "bytes": 74117,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/safety",
+      "status": 200,
+      "saved": true,
+      "file": "safety\\index.html",
+      "bytes": 74904,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/docs",
+      "status": 200,
+      "saved": true,
+      "file": "docs\\index.html",
+      "bytes": 353186,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/researchers",
+      "status": 200,
+      "saved": true,
+      "file": "researchers\\index.html",
+      "bytes": 74809,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/organisations",
+      "status": 200,
+      "saved": true,
+      "file": "organisations\\index.html",
+      "bytes": 68379,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/publications",
+      "status": 200,
+      "saved": true,
+      "file": "publications\\index.html",
+      "bytes": 76818,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/about",
+      "status": 200,
+      "saved": true,
+      "file": "about\\index.html",
+      "bytes": 72696,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/journal",
+      "status": 200,
+      "saved": true,
+      "file": "journal\\index.html",
+      "bytes": 63144,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/press",
+      "status": 200,
+      "saved": true,
+      "file": "press\\index.html",
+      "bytes": 85770,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/careers",
+      "status": 200,
+      "saved": true,
+      "file": "careers\\index.html",
+      "bytes": 69040,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/contact",
+      "status": 200,
+      "saved": true,
+      "file": "contact\\index.html",
+      "bytes": 69674,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/keys",
+      "status": 200,
+      "saved": true,
+      "file": "keys\\index.html",
+      "bytes": 62141,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/privacy",
+      "status": 200,
+      "saved": true,
+      "file": "privacy\\index.html",
+      "bytes": 64617,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/terms",
+      "status": 200,
+      "saved": true,
+      "file": "terms\\index.html",
+      "bytes": 61485,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/stats.html",
+      "status": 0,
+      "saved": false,
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://teseralab.com/sign.html",
+      "status": 0,
+      "saved": false,
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://teseralab.com/perps",
+      "status": 200,
+      "saved": true,
+      "file": "perps\\index.html",
+      "bytes": 62117,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/private",
+      "status": 200,
+      "saved": true,
+      "file": "private\\index.html",
+      "bytes": 64245,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/favicon-v3.png",
+      "status": 200,
+      "saved": true,
+      "file": "favicon-v3.png",
+      "bytes": 911,
+      "type": "image/png"
+    },
+    {
+      "url": "https://teseralab.com/icon-192-v3.png",
+      "status": 200,
+      "saved": true,
+      "file": "icon-192-v3.png",
+      "bytes": 10266,
+      "type": "image/png"
+    },
+    {
+      "url": "https://teseralab.com/apple-touch-icon-v3.png",
+      "status": 200,
+      "saved": true,
+      "file": "apple-touch-icon-v3.png",
+      "bytes": 9383,
+      "type": "image/png"
+    },
+    {
+      "url": "https://teseralab.com/fonts/Geist-Light.woff2",
+      "status": 200,
+      "saved": true,
+      "file": "fonts\\Geist-Light.woff2",
+      "bytes": 45512,
+      "type": "font/woff2"
+    },
+    {
+      "url": "https://teseralab.com/fonts/fonts.css",
+      "status": 200,
+      "saved": true,
+      "file": "fonts\\fonts.css",
+      "bytes": 653,
+      "type": "text/css"
+    },
+    {
+      "url": "https://teseralab.com/research",
+      "status": 200,
+      "saved": true,
+      "file": "research\\index.html",
+      "bytes": 87141,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/docs",
+      "status": 200,
+      "saved": true,
+      "file": "docs\\index.html",
+      "bytes": 353186,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/contact",
+      "status": 200,
+      "saved": true,
+      "file": "contact\\index.html",
+      "bytes": 69674,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/",
+      "status": 200,
+      "saved": true,
+      "file": "index.html",
+      "bytes": 252044,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/worlds",
+      "status": 200,
+      "saved": true,
+      "file": "worlds\\index.html",
+      "bytes": 95181,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/agents",
+      "status": 200,
+      "saved": true,
+      "file": "agents\\index.html",
+      "bytes": 74117,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/safety",
+      "status": 200,
+      "saved": true,
+      "file": "safety\\index.html",
+      "bytes": 74904,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/researchers",
+      "status": 200,
+      "saved": true,
+      "file": "researchers\\index.html",
+      "bytes": 74809,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/organisations",
+      "status": 200,
+      "saved": true,
+      "file": "organisations\\index.html",
+      "bytes": 68379,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/publications",
+      "status": 200,
+      "saved": true,
+      "file": "publications\\index.html",
+      "bytes": 76818,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/keys",
+      "status": 200,
+      "saved": true,
+      "file": "keys\\index.html",
+      "bytes": 62141,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/about",
+      "status": 200,
+      "saved": true,
+      "file": "about\\index.html",
+      "bytes": 72696,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/journal",
+      "status": 200,
+      "saved": true,
+      "file": "journal\\index.html",
+      "bytes": 63144,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/press",
+      "status": 200,
+      "saved": true,
+      "file": "press\\index.html",
+      "bytes": 85770,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/careers",
+      "status": 200,
+      "saved": true,
+      "file": "careers\\index.html",
+      "bytes": 69040,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/privacy",
+      "status": 200,
+      "saved": true,
+      "file": "privacy\\index.html",
+      "bytes": 64617,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/terms",
+      "status": 200,
+      "saved": true,
+      "file": "terms\\index.html",
+      "bytes": 61485,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/js/three.min.js",
+      "status": 200,
+      "saved": true,
+      "file": "js\\three.min.js",
+      "bytes": 608081,
+      "type": "text/javascript"
+    },
+    {
+      "url": "https://teseralab.com/js/lenis.min.js",
+      "status": 200,
+      "saved": true,
+      "file": "js\\lenis.min.js",
+      "bytes": 13485,
+      "type": "text/javascript"
+    },
+    {
+      "url": "https://teseralab.com/img/footer-v3.webp",
+      "status": 200,
+      "saved": true,
+      "file": "img\\footer-v3.webp",
+      "bytes": 90624,
+      "type": "image/webp"
+    },
+    {
+      "url": "https://teseralab.com/%23n",
+      "status": 404,
+      "saved": false
+    },
+    {
+      "url": "https://teseralab.com/+mc.toDataURL(",
+      "status": 404,
+      "saved": false
+    },
+    {
+      "url": "https://teseralab.com/fonts/mona.woff2",
+      "status": 200,
+      "saved": true,
+      "file": "fonts\\mona.woff2",
+      "bytes": 98124,
+      "type": "font/woff2"
+    },
+    {
+      "url": "https://teseralab.com/contact?r=feedback",
+      "status": 200,
+      "saved": true,
+      "file": "contact\\index.html",
+      "bytes": 69674,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/contact?r=org",
+      "status": 200,
+      "saved": true,
+      "file": "contact\\index.html",
+      "bytes": 69674,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/og/home.png",
+      "status": 200,
+      "saved": true,
+      "file": "og\\home.png",
+      "bytes": 61869,
+      "type": "image/png"
+    },
+    {
+      "url": "https://teseralab.com/og/docs.png",
+      "status": 200,
+      "saved": true,
+      "file": "og\\docs.png",
+      "bytes": 97702,
+      "type": "image/png"
+    },
+    {
+      "url": "https://teseralab.com/og/about.png",
+      "status": 200,
+      "saved": true,
+      "file": "og\\about.png",
+      "bytes": 64658,
+      "type": "image/png"
+    },
+    {
+      "url": "https://teseralab.com/contact?r=press",
+      "status": 200,
+      "saved": true,
+      "file": "contact\\index.html",
+      "bytes": 69674,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/contact?r=careers",
+      "status": 200,
+      "saved": true,
+      "file": "contact\\index.html",
+      "bytes": 69674,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/js/keys.js",
+      "status": 200,
+      "saved": true,
+      "file": "js\\keys.js",
+      "bytes": 4014,
+      "type": "text/javascript"
+    },
+    {
+      "url": "https://teseralab.com/contact?r=security",
+      "status": 200,
+      "saved": true,
+      "file": "contact\\index.html",
+      "bytes": 69674,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/contact?r=general",
+      "status": 200,
+      "saved": true,
+      "file": "contact\\index.html",
+      "bytes": 69674,
+      "type": "text/html"
+    },
+    {
+      "url": "https://teseralab.com/js/perps.js",
+      "status": 200,
+      "saved": true,
+      "file": "js\\perps.js",
+      "bytes": 109501,
+      "type": "text/javascript"
+    },
+    {
+      "url": "https://teseralab.com/js/private.js",
+      "status": 200,
+      "saved": true,
+      "file": "js\\private.js",
+      "bytes": 677536,
+      "type": "text/javascript"
+    },
+    {
+      "url": "https://teseralab.com/fonts/Geist-Regular.woff2",
+      "status": 200,
+      "saved": true,
+      "file": "fonts\\Geist-Regular.woff2",
+      "bytes": 45144,
+      "type": "font/woff2"
+    },
+    {
+      "url": "https://teseralab.com/fonts/Geist-Medium.woff2",
+      "status": 200,
+      "saved": true,
+      "file": "fonts\\Geist-Medium.woff2",
+      "bytes": 46380,
+      "type": "font/woff2"
+    },
+    {
+      "url": "https://teseralab.com/fonts/GeistMono-Regular.woff2",
+      "status": 200,
+      "saved": true,
+      "file": "fonts\\GeistMono-Regular.woff2",
+      "bytes": 50404,
+      "type": "font/woff2"
+    },
+    {
+      "url": "https://teseralab.com/fonts/GeistMono-Medium.woff2",
+      "status": 200,
+      "saved": true,
+      "file": "fonts\\GeistMono-Medium.woff2",
+      "bytes": 51452,
+      "type": "font/woff2"
+    },
+    {
+      "url": "https://teseralab.com/js/t",
+      "status": 404,
+      "saved": false
+    },
+    {
+      "url": "https://teseralab.com/js/image/png",
+      "status": 404,
+      "saved": false
+    },
+    {
+      "url": "https://teseralab.com/js/t,e",
+      "status": 404,
+      "saved": false
+    },
+    {
+      "url": "https://teseralab.com/js/,",
+      "status": 404,
+      "saved": false
+    },
+    {
+      "url": "https://teseralab.com/js/private-prover.js",
+      "status": 200,
+      "saved": true,
+      "file": "js\\private-prover.js",
+      "bytes": 313687,
+      "type": "text/javascript"
+    }
+  ]
+}
