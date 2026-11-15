@@ -1,6 +1,6 @@
 # Nilmo
 
-Complete Tesera frontend mirror prepared for local use and GitHub Pages.
+Complete Nilmo frontend prepared for GitHub Pages.
 
 ## GitHub Pages
 

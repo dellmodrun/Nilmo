@@ -35,4 +35,4 @@ http.createServer((request, response) => {
   response.writeHead(200, { "content-type": mime[path.extname(file).toLowerCase()] || "application/octet-stream", "cache-control": "no-cache" });
   if (request.method === "HEAD") return response.end();
   fs.createReadStream(file).pipe(response);
-}).listen(port, "127.0.0.1", () => console.log(`Tesera local mirror: http://127.0.0.1:${port}/`));
+}).listen(port, "127.0.0.1", () => console.log(`Nilmo local preview: http://127.0.0.1:${port}/`));
