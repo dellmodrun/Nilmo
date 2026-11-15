@@ -17,5 +17,11 @@ const result = {
   failures,
 };
 await page.screenshot({ path: 'qa-nilmo-home.png' });
+await page.evaluate(() => {
+  const story = document.querySelector('.story');
+  window.scrollTo(0, story.offsetTop + (story.offsetHeight - innerHeight) * 0.95);
+});
+await page.waitForTimeout(2_500);
+await page.screenshot({ path: 'qa-nilmo-live.png' });
 console.log(JSON.stringify(result, null, 2));
 await browser.close();

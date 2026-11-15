@@ -19,6 +19,10 @@ async function update(directory) {
     const branded = original
       .replace(/TESERA/g, 'NILMO')
       .replace(/Tesera/g, 'Nilmo')
+      .replace(/https:\/\/x\.com\/teseralab/g, 'https://x.com/nilmonwork')
+      .replace(/@teseralab/g, '@nilmonwork')
+      .replace(/>teseralab</g, '>nilmonwork<')
+      .replace(/contact@nilmonwork\.com/g, 'contact@teseralab.com')
       .replace(/<a class="mark"([^>]*)><img[^>]*>/g, '<a class="mark"$1><img class="logo" src="/img/nilmo-logo.png" alt="Nilmo logo" width="26" height="26">')
       .replace(/<a class="tf-lg"([^>]*)><img[^>]*>/g, '<a class="tf-lg"$1><img src="/img/nilmo-logo.png" alt="Nilmo logo" width="24" height="24">')
       .replace(/href="(?:favicon-v3|icon-192-v3|apple-touch-icon-v3)\.png"/g, 'href="/img/nilmo-logo.png"')
