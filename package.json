@@ -5,6 +5,9 @@
   "type": "module",
   "scripts": {
     "rebrand": "node tools/rebrand-nilmo.mjs",
+    "migrate:solana": "node tools/migrate-solana.mjs",
+    "audit:solana": "node tools/audit-solana.mjs",
+    "qa:site": "node tools/qa-solana-site.mjs",
     "build:pages": "node tools/build-pages.mjs",
     "check:pages": "node tools/check-pages.mjs"
   }
