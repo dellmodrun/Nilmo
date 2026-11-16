@@ -7,8 +7,15 @@
     "rebrand": "node tools/rebrand-nilmo.mjs",
     "migrate:solana": "node tools/migrate-solana.mjs",
     "audit:solana": "node tools/audit-solana.mjs",
+    "publish:endpoint": "node tools/publish-mcp-endpoint.mjs",
+    "test:mcp": "node tools/test-mcp.mjs",
     "qa:site": "node tools/qa-solana-site.mjs",
     "build:pages": "node tools/build-pages.mjs",
     "check:pages": "node tools/check-pages.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/node": "^2.1.2",
+    "@modelcontextprotocol/server": "^2.4.0",
+    "zod": "^4.6.7"
   }
 }

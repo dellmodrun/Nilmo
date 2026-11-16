@@ -58,8 +58,24 @@ if (await solanaLink.count()) {
 const docsHeading = await page.locator('#art h1').first().innerText().catch(() => '');
 await page.screenshot({ path: path.join(root, 'qa-solana-docs.png') });
 
+await page.goto('http://127.0.0.1:4323/docs.html#/quickstart', { waitUntil: 'networkidle' });
+await page.waitForTimeout(500);
+const quickstartLink = page.locator('a[href="#/quickstart"]').first();
+if (await quickstartLink.count()) {
+  await quickstartLink.click();
+  await page.waitForTimeout(300);
+}
+const quickstartText = await page.locator('#art').innerText().catch(() => '');
+const quickstartLive = quickstartText.includes('https://nilmo-solana-mcp.vercel.app/mcp') && !quickstartText.includes('Coming soon');
+
+await page.goto('http://127.0.0.1:4323/stats.html', { waitUntil: 'networkidle' });
+await page.waitForFunction(() => document.querySelector('#st-up')?.textContent?.startsWith('Live'), null, { timeout: 20_000 }).catch(() => {});
+const statusText = await page.locator('#st-up').innerText().catch(() => '');
+const slotText = await page.locator('#st-1').innerText().catch(() => '');
+const liveStatus = statusText.startsWith('Live') && /^\d[\d,]+$/.test(slotText);
+
 const failedPages = results.filter(result => result.status !== 200 || result.legacy || result.oldX || !result.title.includes('Nilmo'));
-console.log(JSON.stringify({ pages: results.length, failedPages, docsHeading, requestFailures, httpErrors, consoleErrors }, null, 2));
+console.log(JSON.stringify({ pages: results.length, failedPages, docsHeading, quickstartLive, liveStatus, statusText, slotText, requestFailures, httpErrors, consoleErrors }, null, 2));
 await browser.close();
 
-if (failedPages.length || requestFailures.length || httpErrors.length || consoleErrors.length || docsHeading !== 'Solana basics') process.exit(1);
+if (failedPages.length || requestFailures.length || httpErrors.length || consoleErrors.length || docsHeading !== 'Solana basics' || !quickstartLive || !liveStatus) process.exit(1);
