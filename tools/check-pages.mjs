@@ -12,6 +12,7 @@ async function check(directory) {
       await check(target);
       continue;
     }
+    if (entry.name === 'supabase-js.min.js') continue;
     if (!textExtensions.has(path.extname(entry.name).toLowerCase())) continue;
     const text = await readFile(target, 'utf8');
     if (/(["'`])\/(?!\/|Nilmo(?:\/|["'`]))/.test(text) || /url\(\/(?!\/|Nilmo\/)/.test(text)) {

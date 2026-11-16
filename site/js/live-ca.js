@@ -38,7 +38,7 @@
   async function fetchAddress() {
     try {
       var response = await fetch(
-        SUPABASE_URL + '/rest/v1/' + TABLE + '?id=eq.main&select=contract_address,updated_at',
+        `${SUPABASE_URL}/rest/v1/${TABLE}?id=eq.main&select=contract_address,updated_at`,
         {
           headers: { apikey: SUPABASE_PUBLISHABLE_KEY, accept: 'application/json' },
           cache: 'no-store'

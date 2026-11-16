@@ -17,6 +17,7 @@ async function rewrite(directory) {
       await rewrite(target);
       continue;
     }
+    if (entry.name === 'supabase-js.min.js') continue;
     if (!textExtensions.has(path.extname(entry.name).toLowerCase())) continue;
 
     const original = await readFile(target, 'utf8');
