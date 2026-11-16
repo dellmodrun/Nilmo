@@ -89,11 +89,13 @@ button,input{font:inherit;color:inherit}
 .ch h2{font-size:clamp(22px,2.2vw,34px)}
 .ch p{color:var(--ink2);opacity:.8;font-family:var(--sans);font-size:15px;line-height:1.6;letter-spacing:0;text-transform:none;font-variant:normal;max-width:40ch;margin-top:6px}
 .ch0 p{display:block;max-width:52ch;margin-top:2px;color:rgba(225,228,230,.76)}
-.ca-box{order:4;position:relative;width:min(520px,86vw);margin-top:8px;padding:13px 16px 12px;border:1px solid rgba(230,234,236,.26);background:linear-gradient(110deg,rgba(230,234,236,.075),rgba(11,13,14,.3));display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 20px;overflow:hidden}
+.ca-box{order:4;position:relative;width:min(520px,86vw);margin-top:8px;padding:13px 16px 12px;border:1px solid rgba(230,234,236,.26);border-radius:0;background:linear-gradient(110deg,rgba(230,234,236,.075),rgba(11,13,14,.3));display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 20px;overflow:hidden;text-align:left;color:inherit;appearance:none;cursor:default;transition:border-color .25s,background .25s}
 .ca-box::before,.ca-box::after{content:"";position:absolute;width:8px;height:8px;border-color:#E6EAEC;border-style:solid;pointer-events:none}.ca-box::before{left:-1px;top:-1px;border-width:1px 0 0 1px}.ca-box::after{right:-1px;bottom:-1px;border-width:0 1px 1px 0}
 .ca-box .ca-label{font-family:var(--wide);font-stretch:112%;font-size:9px;line-height:1.3;letter-spacing:.28em;text-transform:uppercase;color:rgba(225,228,230,.5)}
 .ca-box .ca-value{grid-row:1/3;grid-column:2;font-family:"Geist Mono",monospace;font-size:13px;letter-spacing:.16em;color:#E6EAEC}
 .ca-box .ca-note{font-family:var(--sans);font-size:12px;line-height:1.35;color:rgba(225,228,230,.68)}
+.ca-box[data-copyable="true"]{cursor:pointer;border-color:rgba(230,234,236,.46)}.ca-box[data-copyable="true"]:hover{background:linear-gradient(110deg,rgba(230,234,236,.12),rgba(11,13,14,.34));border-color:#E6EAEC}
+.ca-box[data-copyable="true"] .ca-value{grid-row:2;grid-column:1/-1;max-width:100%;font-size:11px;line-height:1.5;letter-spacing:.035em;overflow-wrap:anywhere}.ca-box[data-copyable="true"] .ca-note{grid-row:3;grid-column:1/-1}
 .ch .h .l>span,.ch .n,.ch p,.ch .ctas,.ch .ca-box{will-change:transform,opacity}
 .ch .ctas{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .ch0{top:auto;bottom:clamp(70px,13vh,150px);transform:none}
@@ -205,7 +207,7 @@ footer{margin-top:clamp(110px,13vw,190px);border-top:1px solid var(--line)}
     <div class="ch ch0" data-c="0">
       <h1 class="h">The Solana gateway<br>for AI.</h1>
       <p>Live on-chain data and safe transaction simulation for AI.</p>
-      <div class="ca-box" aria-label="Nilmo contract address status"><span class="ca-label">Contract address</span><strong class="ca-value">TBA</strong><span class="ca-note">Official CA will be announced here.</span></div>
+      <button class="ca-box" id="nilmo-ca" type="button" data-copyable="false" disabled aria-live="polite" aria-label="Nilmo contract address status"><span class="ca-label" id="nilmo-ca-label">Contract address</span><strong class="ca-value" id="nilmo-ca-value">TBA</strong><span class="ca-note" id="nilmo-ca-note">Official CA will be announced here.</span></button>
     </div>
     <div class="ch" data-c="1"><span class="n">01 · Read</span><h2 class="h">Ask Nilmo<br>about Solana.</h2><p>Read live SOL and token balances, inspect accounts, check recent signatures and retrieve confirmed transactions from Solana mainnet-beta.</p></div>
     <div class="ch" data-c="2"><span class="n">02 · Connect</span><h2 class="h">Bring Nilmo<br>to your AI.</h2><p>Add one Streamable HTTP endpoint to an MCP-compatible client. The available clients and setup steps depend on the MCP support in each product.</p></div>
@@ -223,6 +225,8 @@ footer{margin-top:clamp(110px,13vw,190px);border-top:1px solid var(--line)}
 <div><span>Legal</span><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div></nav></div>
 <div class="tf-l"><span>© 2026 Nilmo</span><span>Nilmo is an independent company building on-chain infrastructure for AI agents.</span></div></footer>
 
+<script src="/js/supabase-js.min.js"></script>
+<script src="/js/live-ca.js"></script>
 <script src="/js/three.min.js"></script>
 <script src="/js/lenis.min.js"></script>
 <script>
