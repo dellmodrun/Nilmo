@@ -7,6 +7,7 @@
     "rebrand": "node tools/rebrand-nilmo.mjs",
     "migrate:solana": "node tools/migrate-solana.mjs",
     "audit:solana": "node tools/audit-solana.mjs",
+    "refine:copy": "node tools/refine-site-copy.mjs",
     "publish:endpoint": "node tools/publish-mcp-endpoint.mjs",
     "test:mcp": "node tools/test-mcp.mjs",
     "qa:site": "node tools/qa-solana-site.mjs",
