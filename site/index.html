@@ -355,18 +355,20 @@ var terrain=pts(tP,tA,tS,ptMat(tU,[
  "float base=a*(1.+sw*6.)+rake;float fc=smoothstep(.08,.9,face);base=mix(base,a*.18+fc*fc*2.7,uLogo);",
  "va=base*uK*clamp(1.5-z/uFog,.05,1.)/mix(1.,2.4,uLogo);}"].join("")));terrain.material.fragmentShader="uniform float enc;varying float va;varying float vs;void main(){vec2 q=gl_PointCoord-.5;float k=vs>1.2?exp(-dot(q,q)*10.)*1.7:1.;gl_FragColor=vec4(va*k*enc,0.,0.,1.);}";terrain.material.needsUpdate=true;terrain.geometry.setAttribute("j",new THREE.Float32BufferAttribute(tJ,2));
 
-/* ---- six coherent future relics: prism, Mobius, gyroscope, crystal, helix, portal ---- */
-function formPts(k,N){var o=[],PI=Math.PI,TAU=PI*2;for(var i=0;i<N;i++){var u=i/N,t=u*TAU,q=rnd(),w=rnd(),x=0,y=0,z=0;
- if(k===0){/* three twisting Solana light prisms */var b=i%3,s=q*2-1,tw=s*.72,wide=(w-.5)*.28,yy=(b-1)*.58+s*.18;x=s*.92*Math.cos(tw)-wide*Math.sin(tw);z=s*.92*Math.sin(tw)+wide*Math.cos(tw);y=yy+(w-.5)*.08}
- else if(k===1){/* Mobius ribbon */var v=(w-.5)*.48,ct=Math.cos(t),st=Math.sin(t),ch=Math.cos(t*.5),sh=Math.sin(t*.5);x=(.76+v*ch)*ct;y=(.76+v*ch)*st;z=v*sh}
- else if(k===2){/* three-axis gyroscope and luminous core */if(i<N*.82){var ring=i%3,rr=.84+(w-.5)*.055,px=rr*Math.cos(t),py=rr*Math.sin(t);if(ring===0){x=px;y=py;z=(q-.5)*.055}else if(ring===1){x=px;z=py;y=(q-.5)*.055}else{x=(q-.5)*.055;y=px;z=py}}else{var th=Math.acos(2*q-1),ph=w*TAU,rc=.27;x=Math.sin(th)*Math.cos(ph)*rc;y=Math.cos(th)*rc;z=Math.sin(th)*Math.sin(ph)*rc}}
- else if(k===3){/* twenty triangular crystal facets */var face=i%20,top=face<10,seg=face%10,a0=seg*TAU/10,a1=(seg+1)*TAU/10,sq=Math.sqrt(q),wa=1-sq,wb=sq*(1-w),wc=sq*w;x=wb*Math.cos(a0)*.72+wc*Math.cos(a1)*.72;z=wb*Math.sin(a0)*.72+wc*Math.sin(a1)*.72;y=wa*(top?.98:-.98)}
- else if(k===4){/* DNA double helix with cross rungs */var turns=3.25,ang=u*TAU*turns,side=i%2?1:-1,rad=.48;if(i%7){x=rad*Math.cos(ang+side*PI*.5);z=rad*Math.sin(ang+side*PI*.5);y=(u-.5)*1.7}else{var rline=(w-.5)*.96;x=rline*Math.cos(ang);z=rline*Math.sin(ang);y=(u-.5)*1.7}}
- else{/* black-hole portal: empty centre, warped disc and polar arcs */if(i<N*.78){var rp=.44+Math.pow(q,.72)*.7,warp=.13*Math.sin(t*3)*(1-q);x=rp*Math.cos(t);z=rp*Math.sin(t);y=(w-.5)*.08+warp}else{var tilt=i%2?1:-1,rp2=.9+(w-.5)*.05;x=rp2*Math.cos(t);y=rp2*Math.sin(t)*.62;z=rp2*Math.sin(t)*tilt*.32}}
- o.push(x*5,y*5,z*5)}return o}
+/* ---- six AI glyphs, redrawn as one emerald point-cloud family ---- */
+function formPts(k,N){var o=[],PI=Math.PI,TAU=PI*2;
+ function line(ax,ay,bx,by,s,th){var dx=bx-ax,dy=by-ay,ll=Math.sqrt(dx*dx+dy*dy)||1,j=(rnd()-.5)*th;return[ax+dx*s-dy/ll*j,ay+dy*s+dx/ll*j]}
+ for(var i=0;i<N;i++){var u=i/N,t=u*TAU,q=rnd(),w=rnd(),x=0,y=0,z=(rnd()-.5)*.12;
+  if(k===0){/* ChatGPT-inspired interlocking six-loop knot */var arm=i%6,a=arm*TAU/6,tt=Math.floor(i/6)/(N/6)*TAU,cx=Math.cos(a)*.31,cy=Math.sin(a)*.31,rx=.43,ry=.205,px=rx*Math.cos(tt),py=ry*Math.sin(tt),ca=Math.cos(a+PI/2),sa=Math.sin(a+PI/2),j=(w-.5)*.045;x=cx+px*ca-py*sa+j*Math.cos(tt);y=cy+px*sa+py*ca+j*Math.sin(tt);z+=(arm-2.5)*.018}
+  else if(k===1){/* Claude-inspired radiant asterisk */var ray=i%12,a=ray*TAU/12,rr=.1+Math.pow(q,.7)*.91,sw=(w-.5)*(.11-.065*rr),ca=Math.cos(a),sa=Math.sin(a);x=ca*rr-sa*sw;y=sa*rr+ca*sw;if(i%17===0){var cr=.18*Math.sqrt(q),ct=w*TAU;x=cr*Math.cos(ct);y=cr*Math.sin(ct)}}
+  else if(k===2){/* Gemini-inspired four-point spark */var a=t,edge=.2+.82*Math.pow(Math.abs(Math.cos(2*a)),5),fill=i%5===0?.22+.78*Math.sqrt(q):.94+(q-.5)*.1,rr=edge*fill;x=rr*Math.cos(a);y=rr*Math.sin(a);z+=(1-fill)*.08}
+  else if(k===3){/* Grok-inspired broken orbit and signal slash */if(i<N*.68){var a=-2.18+q*TAU*.82,rr=.78+(w-.5)*.075;x=rr*Math.cos(a);y=rr*Math.sin(a)}else if(i<N*.9){var p=line(-.7,-.66,.72,.72,q,.095);x=p[0];y=p[1]}else{var p=line(.14,.12,.84,.12,q,.075);x=p[0];y=p[1]}z+=(x-y)*.025}
+  else if(k===4){/* DeepSeek-inspired whale, wave and tail */if(i<N*.55){var a=-.12+q*TAU*.94,rr=.72+(w-.5)*.085;x=.06+rr*Math.cos(a);y=-.04+.47*rr*Math.sin(a)}else if(i<N*.7){var side=i%2?1:-1,p=line(-.58,-.02,-.98,side*.43,q,.095);x=p[0];y=p[1]}else if(i<N*.92){var a=PI+.08+q*(PI-.2),rr=.47+(w-.5)*.065;x=.25+rr*Math.cos(a);y=-.03+rr*.44*Math.sin(a)}else{var a=w*TAU,rr=.065*Math.sqrt(q);x=.43+rr*Math.cos(a);y=.12+rr*Math.sin(a);z=.08+(rnd()-.5)*.04}}
+  else{/* Perplexity-inspired woven lattice */var L=[[-.72,0,.72,0],[0,-.88,0,.88],[-.72,0,0,.72],[0,.72,.72,0],[.72,0,0,-.72],[0,-.72,-.72,0],[-.5,.5,-.5,-.55],[.5,.5,.5,-.55],[-.5,.5,0,.88],[0,.88,.5,.5],[-.5,-.55,0,-.88],[0,-.88,.5,-.55]],sg=L[i%L.length],p=line(sg[0],sg[1],sg[2],sg[3],q,.065);x=p[0];y=p[1];z+=(i%2?.035:-.035)}
+  o.push(x*5,y*5,z*5)}return o}
 var FPOS=[[-60,26,0],[-20,30,-40],[30,24,-70],[60,28,-10],[10,32,40],[-40,26,60]];
-var FROT=[[.28,.3,0],[.18,.12,.12],[.26,.25,0],[.18,.4,0],[.2,.2,.08],[.36,.12,0]];
-var forms=[];for(var k=0;k<6;k++){var P=formPts(k,1800),A=[],S=[];for(var i=0;i<1800;i++){var hot=rnd()<.08;A.push((hot?240:160)/K0);S.push(hot?2:1)}
+var FROT=[[.11,0,-.06],[.08,0,.04],[.12,0,-.03],[.09,0,.06],[.1,0,-.04],[.08,0,.03]],FN=LOWP?1500:2400;
+var forms=[];for(var k=0;k<6;k++){var P=formPts(k,FN),A=[],S=[];for(var i=0;i<FN;i++){var hot=rnd()<.075;A.push((hot?245:158)/K0);S.push(hot?2:1)}
  var m=ptMat({});m.fragmentShader="uniform float enc;varying float va;void main(){vec2 q=gl_PointCoord-.5;float core=exp(-dot(q,q)*10.);gl_FragColor=vec4(0.,va*enc*(.7+.55*core),0.,1.);}";m.needsUpdate=true;var o=pts(P,A,S,m);o.position.set(FPOS[k][0],FPOS[k][1],FPOS[k][2]);forms.push({o:o,m:m,base:FPOS[k]})}
 
 /* ---- the world as one tile: a dotted frame with corner brackets, neighbouring tiles fading out ---- */
@@ -430,8 +432,8 @@ addEventListener("resize",resize);resize();
 
 /* labels */
 var tagsEl=document.getElementById("tags"),tags=[];for(var tq=0;tq<6;tq++){var d0=document.createElement("div");d0.className="tg";tagsEl.appendChild(d0);tags.push(d0)}
-var prj=new V3(),CLIENTS=["SOLANA PRISM","MOBIUS","GYROSCOPE","CRYSTAL","HELIX","PORTAL"];
-function placeTag(el,v,html,alpha){prj.copy(v).project(camera);if(prj.z>1||Math.abs(prj.x)>1.05||Math.abs(prj.y)>1.05||alpha<.02){el.style.opacity=0;return}var sx=(prj.x*.5+.5)*innerWidth,sy=(-prj.y*.5+.5)*innerHeight,cr0=chs[2].getBoundingClientRect(),inside=sx>cr0.left-30&&sx<cr0.right+40&&sy>cr0.top-30&&sy<cr0.bottom+30,zone=inside?0:1;el.innerHTML=html;el.style.opacity=(alpha*zone).toFixed(3);el.style.transform="translate("+(sx+14).toFixed(1)+"px,"+(sy-7).toFixed(1)+"px)"}
+var prj=new V3(),CLIENTS=["CHATGPT","CLAUDE","GEMINI","GROK","DEEPSEEK","PERPLEXITY"],TAGOFF=[[-44,-25],[18,-25],[16,-23],[16,-20],[16,-23],[18,16]];
+function placeTag(el,v,html,alpha,ix){prj.copy(v).project(camera);if(prj.z>1||Math.abs(prj.x)>1.05||Math.abs(prj.y)>1.05||alpha<.02){el.style.opacity=0;return}var sx=(prj.x*.5+.5)*innerWidth,sy=(-prj.y*.5+.5)*innerHeight,cr0=chs[2].getBoundingClientRect(),inside=sx>cr0.left-30&&sx<cr0.right+40&&sy>cr0.top-30&&sy<cr0.bottom+30,zone=inside?0:1,of=TAGOFF[ix];el.innerHTML=html;el.style.opacity=(alpha*zone).toFixed(3);el.style.transform="translate("+(sx+of[0]).toFixed(1)+"px,"+(sy+of[1]).toFixed(1)+"px)"}
 
 var mx=0,my=0,tmx=0,tmy=0;addEventListener("pointermove",function(e){tmx=e.clientX/innerWidth-.5;tmy=e.clientY/innerHeight-.5});
 var clock=performance.now(),T=40,look=new V3(),pS=0;
@@ -453,7 +455,7 @@ function frame(now){
   var POS=[];
   for(var k=0;k<6;k++){var F=forms[k],b=F.base,w=T*(.045+k*.006)+k*1.7;
    var x=b[0]+Math.sin(w)*16+Math.sin(w*2.3+k)*5,z=b[2]+Math.cos(w*1.3+k)*13,y=b[1]+Math.sin(T*1.1+k)*1.2+Math.sin(w*.7)*2;
-   F.o.position.set(x,y,z);F.o.rotation.y=FROT[k][1]+Math.sin(T*.16+k*1.3)*.38;F.o.rotation.x=FROT[k][0]+Math.sin(T*.13+k)*.16;F.o.rotation.z=FROT[k][2]+Math.sin(T*.11+k*1.7)*.1;
+   F.o.position.set(x,y,z);F.o.rotation.y=FROT[k][1]+Math.sin(T*.16+k*1.3)*.16;F.o.rotation.x=FROT[k][0]+Math.sin(T*.13+k)*.09;F.o.rotation.z=FROT[k][2]+Math.sin(T*.11+k*1.7)*.075;
    var br=1+Math.sin(T*1.6+k*1.3)*.06;F.o.scale.set(br,br,br);POS.push(F.o.position);
    var hitK=test*Math.exp(-Math.pow((x-tU.uSweep.value)/10,2));F.m.uniforms.uK.value=(1+hitK*1.6)*endFade;
    var H=HIST[k];H.unshift([x,y-3.5,z]);if(H.length>TRL*4)H.pop()}
@@ -473,7 +475,7 @@ function frame(now){
   compMat.uniforms.sun.value.set((sunP.x*.5+.5)*TW,(sunP.y*.5+.5)*TH,34);compMat.uniforms.sunK.value=sunK*.6;
   tU.uSunX.value=sunP.x*TW*.5;tU.uSunK.value=sunK;
   /* client labels */
-  var ta=innerWidth<700?0:sm((p-.31)/.06)*(1-sm((p-.45)/.05));for(var tq=0;tq<6;tq++)placeTag(tags[tq],new V3(POS[tq].x,POS[tq].y+6,POS[tq].z),CLIENTS[tq],ta);
+  var ta=innerWidth<700?0:sm((p-.31)/.06)*(1-sm((p-.45)/.05));for(var tq=0;tq<6;tq++)placeTag(tags[tq],new V3(POS[tq].x,POS[tq].y+6,POS[tq].z),CLIENTS[tq],ta,tq);
   /* render: light into rtA, glow from a blurred copy, then the amber grade */
   renderer.setRenderTarget(rtA);renderer.setClearColor(0x000000,1);renderer.clear();renderer.render(scene,camera);
   downMat.uniforms.t.value=rtA.texture;renderer.setRenderTarget(rtB);renderer.render(downS,quadCam);
