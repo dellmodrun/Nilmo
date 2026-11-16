@@ -5,7 +5,7 @@ const root = path.resolve(import.meta.dirname, '..');
 const source = path.join(root, 'site');
 const output = path.join(root, '_site');
 const textExtensions = new Set(['.html', '.css', '.js', '.json', '.svg', '.xml', '.webmanifest', '.txt']);
-const basePath = '/Nilmo/';
+const basePath = '/';
 
 await mkdir(output, { recursive: true });
 await cp(source, output, { recursive: true, force: true });

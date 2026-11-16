@@ -4,7 +4,7 @@ Nilmo is a public-beta Solana mainnet-beta MCP gateway with a GitHub Pages front
 
 ## Live services
 
-- Website: `https://dellmodrun.github.io/Nilmo/`
+- Website: `https://nilmo.run/`
 - MCP endpoint: `https://nilmo-solana-mcp.vercel.app/mcp`
 - Gateway health: `https://nilmo-solana-mcp.vercel.app/health`
 
@@ -22,4 +22,4 @@ node server.mjs
 
 Use `NILMO_TEST_MCP_URL=https://nilmo-solana-mcp.vercel.app/mcp` when running the integration test against production. Optional `SOLANA_RPC_URL` and `SOLANA_RPC_FALLBACK_URL` environment variables configure dedicated Solana RPC providers.
 
-The GitHub Pages workflow publishes the complete `site` directory and adjusts root-relative asset paths for the `/Nilmo/` project URL. The Vercel deployment serves `/mcp` and `/health` from the API functions defined in this repository.
+The GitHub Pages workflow publishes the complete `site` directory for the `nilmo.run` custom domain. The Vercel deployment serves `/mcp` and `/health` from the API functions defined in this repository.
