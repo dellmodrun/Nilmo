@@ -312,7 +312,7 @@ var rtA,rtB,rtC,TW=1,TH=1;
 var quadCam=new THREE.OrthographicCamera(-1,1,1,-1,0,1),quadGeo=new THREE.PlaneGeometry(2,2);
 function quad(mat){var m=new THREE.Mesh(quadGeo,mat);var s=new THREE.Scene();s.add(m);return s}
 var downMat=new THREE.ShaderMaterial({uniforms:{t:{value:null},enc:{value:ENC}},vertexShader:"varying vec2 v;void main(){v=uv;gl_Position=vec4(position.xy,0.,1.);}",
- fragmentShader:"uniform sampler2D t;uniform float enc;varying vec2 v;void main(){float r=texture2D(t,v).r/enc;gl_FragColor=vec4(1.-exp(-r),0.,0.,1.);}",depthTest:false,depthWrite:false});
+ fragmentShader:"uniform sampler2D t;uniform float enc;varying vec2 v;void main(){vec4 s=texture2D(t,v);float r=max(s.r,s.g*.82)/enc;gl_FragColor=vec4(1.-exp(-r),0.,0.,1.);}",depthTest:false,depthWrite:false});
 var blurMat=new THREE.ShaderMaterial({uniforms:{t:{value:null},dir:{value:new THREE.Vector2()},sig:{value:3}},vertexShader:"varying vec2 v;void main(){v=uv;gl_Position=vec4(position.xy,0.,1.);}",
  fragmentShader:"uniform sampler2D t;uniform vec2 dir;uniform float sig;varying vec2 v;void main(){float s=0.,w=0.;for(int i=-12;i<=12;i++){float x=float(i)*sig/4.;float k=exp(-.5*x*x/(sig*sig));s+=texture2D(t,v+dir*x).r*k;w+=k;}gl_FragColor=vec4(s/w,0.,0.,1.);}",depthTest:false,depthWrite:false});
 var compMat=new THREE.ShaderMaterial({uniforms:{t:{value:null},b:{value:null},enc:{value:ENC},res:{value:new THREE.Vector2(1,1)},sun:{value:new THREE.Vector3(0,0,0)},sunK:{value:0},glow:{value:1.2},time:{value:0},fade:{value:1}},
@@ -320,11 +320,11 @@ var compMat=new THREE.ShaderMaterial({uniforms:{t:{value:null},b:{value:null},en
  fragmentShader:[
  "uniform sampler2D t;uniform sampler2D b;uniform float enc;uniform vec2 res;uniform vec3 sun;uniform float sunK;uniform float glow;uniform float time;uniform float fade;varying vec2 v;",
  "float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233))+time*7.13)*43758.5453);}",
- "void main(){float r=texture2D(t,v).r/enc;vec2 px=v*res;float sc=res.x/1600.;",
+ "void main(){vec4 src=texture2D(t,v);float r=src.r/enc;float em=1.-exp(-src.g/enc);vec2 px=v*res;float sc=res.x/1600.;",
  "if(sunK>0.){vec2 d=px-sun.xy;float sz=sun.z*sc;float dd=length(d);r+=sunK*(1.6*exp(-pow(dd/sz,2.))+.56*exp(-pow(dd/(sz*3.2),2.))+.8*exp(-pow(d.y/(6.*sc),2.))*exp(-pow(d.x/(sz*5.),2.)));}",
  "float I=1.-exp(-r);float g=texture2D(b,v).r;I=clamp(I+g*glow*.6,0.,1.4);",
- "vec2 q=(px-res*.5)/(res*vec2(.62,.75));I*=1.-.55*clamp(dot(q,q),0.,1.);I*=fade;",
- "vec3 A=vec3(167.,175.,179.)/255.,L=vec3(246.,249.,250.)/255.;vec3 c=clamp(I/.75,0.,1.)*A+clamp((I-.75)/.65,0.,1.)*(L-A)+vec3(11.,13.,14.)/255.+(h(px)-.5)*.024;",
+ "vec2 q=(px-res*.5)/(res*vec2(.62,.75));float vig=1.-.55*clamp(dot(q,q),0.,1.);I*=vig;I*=fade;em*=vig*fade;",
+ "vec3 A=vec3(167.,175.,179.)/255.,L=vec3(246.,249.,250.)/255.;vec3 c=clamp(I/.75,0.,1.)*A+clamp((I-.75)/.65,0.,1.)*(L-A)+vec3(11.,13.,14.)/255.+(h(px)-.5)*.024;vec3 E=vec3(.05,.94,.42),EH=vec3(.62,1.,.76);float ek=clamp(em*1.45,0.,1.);c=mix(c,E,ek*.9)+EH*max(0.,em-.55)*.75;",
  "gl_FragColor=vec4(c,1.);}"].join(""),depthTest:false,depthWrite:false});
 var downS=quad(downMat),blurS=quad(blurMat),compS=quad(compMat);
 
@@ -355,18 +355,18 @@ var terrain=pts(tP,tA,tS,ptMat(tU,[
  "float base=a*(1.+sw*6.)+rake;float fc=smoothstep(.08,.9,face);base=mix(base,a*.18+fc*fc*2.7,uLogo);",
  "va=base*uK*clamp(1.5-z/uFog,.05,1.)/mix(1.,2.4,uLogo);}"].join("")));terrain.material.fragmentShader="uniform float enc;varying float va;varying float vs;void main(){vec2 q=gl_PointCoord-.5;float k=vs>1.2?exp(-dot(q,q)*10.)*1.7:1.;gl_FragColor=vec4(va*k*enc,0.,0.,1.);}";terrain.material.needsUpdate=true;terrain.geometry.setAttribute("j",new THREE.Float32BufferAttribute(tJ,2));
 
-/* ---- six forms ---- */
-function formPts(k,N){var o=[];for(var i=0;i<N;i++){var u=i/N,t=u*6.2832,q=rnd(),w=rnd(),x,y,z;
- if(k===0){var r=.62+.26*Math.cos(3*t);x=r*Math.cos(2*t);y=r*Math.sin(2*t);z=.3*Math.sin(3*t)}
- else if(k===1){var th=Math.acos(2*q-1),ph=w*6.283;x=Math.sin(th)*Math.cos(ph)*.8;y=Math.cos(th)*.8;z=Math.sin(th)*Math.sin(ph)*.8}
- else if(k===2){var tt=u*6.283*5;x=.45*Math.cos(tt);y=(u-.5)*1.5;z=.45*Math.sin(tt)}
- else if(k===3){var a1=q*6.283,a2=w*6.283;x=(.62+.2*Math.cos(a2))*Math.cos(a1);z=(.62+.2*Math.cos(a2))*Math.sin(a1);y=.2*Math.sin(a2)}
- else if(k===4){var nn=11,ii=i%(nn*nn*nn);x=(ii%nn)/(nn-1)-.5;y=(Math.floor(ii/nn)%nn)/(nn-1)-.5;z=(Math.floor(ii/nn/nn)%nn)/(nn-1)-.5}
- else{var r2=Math.pow(q,.6),an=r2*4.2+(i%3)*2.094+(w-.5)*.5;x=r2*Math.cos(an);y=(rnd()-.5)*.06;z=r2*Math.sin(an)}
+/* ---- six Solana-native forms: mark, validator, wallet, token orbit, program block, neural core ---- */
+function formPts(k,N){var o=[];for(var i=0;i<N;i++){var u=i/N,t=u*6.2832,q=rnd(),w=rnd(),x=0,y=0,z=0;
+ if(k===0){/* three slanted Solana rails */var b=i%3,l=(q-.5)*1.55;x=l;y=(b-1)*.56+l*.2;z=(w-.5)*.18;if((i%7)<2){x+=(w-.5)*.16;y+=(q-.5)*.08}}
+ else if(k===1){/* validator beacon */if(i<N*.68){var h=q*1.5-.75,rr=.58*(1-Math.abs(h)*.45);x=rr*Math.cos(t);z=rr*Math.sin(t);y=h}else if(i<N*.9){var ring=(q-.5)*.16+.82;x=ring*Math.cos(t);z=ring*Math.sin(t);y=.58+Math.sin(t*3)*.05}else{var th=Math.acos(2*q-1),ph=w*6.283;x=Math.sin(th)*Math.cos(ph)*.23;y=.96+Math.cos(th)*.23;z=Math.sin(th)*Math.sin(ph)*.23}}
+ else if(k===2){/* wallet vault and clasp */if(i<N*.78){var f=i%6,a=q-.5,b2=w-.5;if(f<2){x=(f?1:-1)*.78;y=a*1.12;z=b2*.44}else if(f<4){x=a*1.56;y=(f===3?1:-1)*.56;z=b2*.44}else{x=a*1.56;y=b2*1.12;z=(f===5?1:-1)*.22}}else{x=.62+(q-.5)*.4;y=(w-.5)*.36;z=.28+(rnd()-.5)*.14}}
+ else if(k===3){/* token core with two orbital paths */if(i<N*.48){var th2=Math.acos(2*q-1),ph2=w*6.283;x=Math.sin(th2)*Math.cos(ph2)*.46;y=Math.cos(th2)*.46;z=Math.sin(th2)*Math.sin(ph2)*.46}else{var rr2=.9+(w-.5)*.05,tilt=(i%2?1:-1)*.52;x=rr2*Math.cos(t);y=rr2*Math.sin(t)*Math.sin(tilt);z=rr2*Math.sin(t)*Math.cos(tilt)}}
+ else if(k===4){/* program data cube */var f2=i%6,c=q-.5,d=w-.5;if(f2<2){x=(f2?1:-1)*.7;y=c*1.4;z=d*1.4}else if(f2<4){x=c*1.4;y=(f2===3?1:-1)*.7;z=d*1.4}else{x=c*1.4;y=d*1.4;z=(f2===5?1:-1)*.7}if(i%5===0){x*=.48;y*=.48;z*=.48}}
+ else{/* AI neural core */var lobe=i%2?1:-1,th3=Math.acos(2*q-1),ph3=w*6.283,r3=.48+.16*Math.sin(ph3*3+th3*2);x=lobe*.34+Math.sin(th3)*Math.cos(ph3)*r3;y=Math.cos(th3)*r3;z=Math.sin(th3)*Math.sin(ph3)*r3;if(i%9===0){x=(q-.5)*.68;y=(w-.5)*.8;z=(rnd()-.5)*.25}}
  o.push(x*5,y*5,z*5)}return o}
 var FPOS=[[-60,26,0],[-20,30,-40],[30,24,-70],[60,28,-10],[10,32,40],[-40,26,60]];
 var forms=[];for(var k=0;k<6;k++){var P=formPts(k,1800),A=[],S=[];for(var i=0;i<1800;i++){var hot=rnd()<.08;A.push((hot?240:160)/K0);S.push(hot?2:1)}
- var m=ptMat({});var o=pts(P,A,S,m);o.position.set(FPOS[k][0],FPOS[k][1],FPOS[k][2]);forms.push({o:o,m:m,base:FPOS[k]})}
+ var m=ptMat({});m.fragmentShader="uniform float enc;varying float va;void main(){vec2 q=gl_PointCoord-.5;float core=exp(-dot(q,q)*10.);gl_FragColor=vec4(0.,va*enc*(.7+.55*core),0.,1.);}";m.needsUpdate=true;var o=pts(P,A,S,m);o.position.set(FPOS[k][0],FPOS[k][1],FPOS[k][2]);forms.push({o:o,m:m,base:FPOS[k]})}
 
 /* ---- the world as one tile: a dotted frame with corner brackets, neighbouring tiles fading out ---- */
 var FY=-7,GAP=SIZE*1.12;
@@ -429,7 +429,7 @@ addEventListener("resize",resize);resize();
 
 /* labels */
 var tagsEl=document.getElementById("tags"),tags=[];for(var tq=0;tq<6;tq++){var d0=document.createElement("div");d0.className="tg";tagsEl.appendChild(d0);tags.push(d0)}
-var prj=new V3(),CLIENTS=["CLAUDE","CHATGPT","CURSOR","CLAUDE CODE","VS CODE","DEVIN"];
+var prj=new V3(),CLIENTS=["SOLANA","VALIDATOR","WALLET","JUPITER","PROGRAM","AI CORE"];
 function placeTag(el,v,html,alpha){prj.copy(v).project(camera);if(prj.z>1||Math.abs(prj.x)>1.05||Math.abs(prj.y)>1.05||alpha<.02){el.style.opacity=0;return}var sx=(prj.x*.5+.5)*innerWidth,sy=(-prj.y*.5+.5)*innerHeight,cr0=chs[2].getBoundingClientRect(),inside=sx>cr0.left-30&&sx<cr0.right+40&&sy>cr0.top-30&&sy<cr0.bottom+30,zone=inside?0:1;el.innerHTML=html;el.style.opacity=(alpha*zone).toFixed(3);el.style.transform="translate("+(sx+14).toFixed(1)+"px,"+(sy-7).toFixed(1)+"px)"}
 
 var mx=0,my=0,tmx=0,tmy=0;addEventListener("pointermove",function(e){tmx=e.clientX/innerWidth-.5;tmy=e.clientY/innerHeight-.5});
