@@ -165,9 +165,6 @@ footer{margin-top:clamp(110px,13vw,190px);border-top:1px solid var(--line)}
 .foot p{color:var(--ink2);font-size:14.5px;max-width:36ch;margin-top:14px}
 .foot nav{display:flex;gap:28px;font-size:14.5px;color:var(--ink2);align-items:flex-start}
 .foot nav a:hover{color:var(--amber)}
-.tg{position:fixed;z-index:2;left:0;top:0;pointer-events:none;font-size:10.5px;letter-spacing:.12em;color:var(--amber);white-space:nowrap;opacity:0;will-change:transform,opacity;display:flex;align-items:center;gap:8px}
-.tg::before{content:"";width:14px;height:1px;background:currentColor;opacity:.7}
-.tg span{color:var(--mute)}
 .nogl{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 60% 60%,rgba(220,226,230,.12),transparent 60%),var(--bg)}
 
 @media (max-width:900px){
@@ -189,7 +186,6 @@ footer{margin-top:clamp(110px,13vw,190px);border-top:1px solid var(--line)}
 <div class="grain" aria-hidden="true"></div>
 <div class="vign" aria-hidden="true"></div>
 <div class="bar" id="bar" aria-hidden="true"></div>
-<div id="tags" aria-hidden="true"></div>
 
 <style id="bon-css">.bon{display:inline-flex;align-items:center;gap:12px;margin-left:22px;white-space:nowrap;vertical-align:middle}.bon .win{position:relative;display:inline-block;height:26px;padding:0 12px;overflow:hidden;box-sizing:content-box;transition:width .65s cubic-bezier(.65,0,.35,1)}.bon .win::before,.bon .win::after{content:"";position:absolute;width:6px;height:6px;z-index:2}.bon .win::before{left:0;top:0;border-left:1px solid #E6EAEC;border-top:1px solid #E6EAEC}.bon .win::after{right:0;bottom:0;border-right:1px solid #E6EAEC;border-bottom:1px solid #E6EAEC}.bon .rl{display:block;position:relative;height:26px}.bon .s{position:absolute;left:0;top:0;height:26px;display:flex;align-items:center;gap:9px;width:max-content;line-height:1;color:#F2F4F5;opacity:0;transform:translate3d(0,9px,0);filter:blur(4px);transition:opacity .55s ease,transform .65s cubic-bezier(.22,.7,.12,1),filter .55s ease;will-change:opacity,transform,filter}.bon .s.on{opacity:1;transform:none;filter:none;transition-delay:.12s}.bon .s.out{opacity:0;transform:translate3d(0,-9px,0);filter:blur(4px);transition-delay:0s}.bon .s svg,.bon .s img{height:11px;width:auto;display:block;flex:none}@media (max-width:600px){.bon{display:flex;margin:10px 0 0}}</style><header class="nav"><div class="in">
   <a class="mark" href="#top" data-go="0" aria-label="Nilmo home"><img class="logo" src="/img/nilmo-logo.png" alt="Nilmo logo" width="26" height="26"><b>NILMO</b></a>
@@ -431,11 +427,6 @@ function resize(){var w=innerWidth,h=innerHeight;wide=w>900;renderer.setSize(w,h
  compMat.uniforms.res.value.set(TW,TH);tU.uResX.value=TW}
 addEventListener("resize",resize);resize();
 
-/* labels */
-var tagsEl=document.getElementById("tags"),tags=[];for(var tq=0;tq<6;tq++){var d0=document.createElement("div");d0.className="tg";tagsEl.appendChild(d0);tags.push(d0)}
-var prj=new V3(),CLIENTS=["CHATGPT","CLAUDE","GEMINI","GROK","DEEPSEEK","PERPLEXITY"],TAGOFF=[[-44,-25],[18,-25],[16,-23],[16,-20],[16,-23],[18,16]];
-function placeTag(el,v,html,alpha,ix){prj.copy(v).project(camera);if(prj.z>1||Math.abs(prj.x)>1.05||Math.abs(prj.y)>1.05||alpha<.02){el.style.opacity=0;return}var sx=(prj.x*.5+.5)*innerWidth,sy=(-prj.y*.5+.5)*innerHeight,cr0=chs[2].getBoundingClientRect(),inside=sx>cr0.left-30&&sx<cr0.right+40&&sy>cr0.top-30&&sy<cr0.bottom+30,zone=inside?0:1,of=TAGOFF[ix];el.innerHTML=html;el.style.opacity=(alpha*zone).toFixed(3);el.style.transform="translate("+(sx+of[0]).toFixed(1)+"px,"+(sy+of[1]).toFixed(1)+"px)"}
-
 var mx=0,my=0,tmx=0,tmy=0;addEventListener("pointermove",function(e){tmx=e.clientX/innerWidth-.5;tmy=e.clientY/innerHeight-.5});
 var clock=performance.now(),T=40,look=new V3(),pS=0;
 function frame(now){
@@ -476,7 +467,6 @@ function frame(now){
   compMat.uniforms.sun.value.set((sunP.x*.5+.5)*TW,(sunP.y*.5+.5)*TH,34);compMat.uniforms.sunK.value=sunK*.6;
   tU.uSunX.value=sunP.x*TW*.5;tU.uSunK.value=sunK;
   /* client labels */
-  var ta=innerWidth<700?0:sm((p-.31)/.06)*(1-sm((p-.45)/.05));for(var tq=0;tq<6;tq++)placeTag(tags[tq],new V3(POS[tq].x,POS[tq].y+6,POS[tq].z),CLIENTS[tq],ta,tq);
   /* render: light into rtA, glow from a blurred copy, then the amber grade */
   renderer.setRenderTarget(rtA);renderer.setClearColor(0x000000,1);renderer.clear();renderer.render(scene,camera);
   downMat.uniforms.t.value=rtA.texture;renderer.setRenderTarget(rtB);renderer.render(downS,quadCam);
@@ -486,7 +476,7 @@ function frame(now){
   compMat.uniforms.t.value=rtA.texture;compMat.uniforms.b.value=rtB.texture;compMat.uniforms.time.value=T;
   renderer.setRenderTarget(null);renderer.render(compS,quadCam);
  }
- gl.style.opacity=past?0:1;if(past)tags.forEach(function(el){el.style.opacity=0});
+ gl.style.opacity=past?0:1;
  requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
