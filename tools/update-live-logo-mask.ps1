@@ -22,7 +22,10 @@ for ($y = 0; $y -lt $size; $y++) {
         $pixel = $canvas.GetPixel($x, $y)
         $alpha = $pixel.A / 255.0
         $luma = (0.2126 * $pixel.R + 0.7152 * $pixel.G + 0.0722 * $pixel.B) / 255.0
-        $strength = $alpha * (0.25 + 0.75 * $luma)
+        # The live chapter renders the mask as monochrome points on a dark
+        # scene. Keep dark, opaque logo shapes visible at a mid intensity
+        # while allowing the white mark to remain the brightest layer.
+        $strength = $alpha * (0.55 + 0.45 * $luma)
         $digit = [Math]::Min(9, [Math]::Max(0, [Math]::Round($strength * 9)))
         [void]$digits.Append([int]$digit)
     }
